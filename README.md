@@ -24,4 +24,4 @@ O projeto foi hospedado na [Vercel](https://vercel.com/) e se comunica com um ba
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/SEU_USUARIO/shorten_web.git
+   git clone https://github.com/CarolinaRussi/shorten_web.git
