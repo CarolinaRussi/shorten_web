@@ -5,6 +5,8 @@ import styled from "styled-components";
 import Form from "./components/Form";
 import axios from "axios";
 
+const API_URL = process.env.REACT_APP_API_URL;
+
 const Container = styled.div`
   width: 100%;
   max-width: 1000px;
@@ -51,7 +53,7 @@ const Redirect = () => {
   useEffect(() => {
     const fetchLongUrl = async () => {
       try {
-        const response = await axios.get(`http://localhost:8800/${shortCode}`);
+        const response = await axios.get(`${API_URL}${shortCode}`);
         if (response.status === 200) {
           const { long_url } = response.data;
           if (long_url) {

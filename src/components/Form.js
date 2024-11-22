@@ -2,6 +2,10 @@ import axios from "axios";
 import React, { useState } from "react";
 import styled from "styled-components";
 
+const API_URL = process.env.REACT_APP_API_URL;
+const WEB_URL = process.env.REACT_APP_WEB_URL;
+console.log("API_URL:", API_URL);
+
 const FormContainer = styled.form`
   width: 100%;
   max-width: 700px;
@@ -66,6 +70,8 @@ const Form = () => {
     const [shortUrl, setShortUrl] = useState(""); 
     const [error, setError] = useState("");
 
+    console.log(API_URL, { long_url: longUrl });
+
     const isValidUrl = (url) => {
         const regex = /^(https?:\/\/)?([\w-]+\.)+[\w-]{2,}(\/[\w-._~:/?#[\]@!$&'()*+,;=]*)?$/i;
         return regex.test(url);
@@ -81,9 +87,9 @@ const Form = () => {
         }
 
         try {
-            const response = await axios.post("http://localhost:8800/", { long_url: longUrl }); //Aqui o axios conversa com meu back
+            const response = await axios.post(API_URL, { long_url: longUrl }); //Aqui o axios conversa com meu back
             const generatedCode = response.data.code; // E aqui eu pego o codigo que o backend gerou
-            setShortUrl(`http://localhost:3000/${generatedCode}`); // Aqui eu construo a url encurtada
+            setShortUrl(`${WEB_URL}${generatedCode}`); // Aqui eu construo a url encurtada
         } catch (error) {
             console.error("Erro ao encurtar a URL:", error);
             setError("Ocorreu um erro ao processar sua solicitação.");
